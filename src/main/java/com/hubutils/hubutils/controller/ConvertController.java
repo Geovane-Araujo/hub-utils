@@ -5,13 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -48,19 +44,23 @@ public class ConvertController {
             String b64 = strImage.split(",")[1];
             byte[] imageByte = Base64.decode(b64);
             BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageByte));
-            int height = image.getHeight();
-            int width = image.getWidth();
-            int x = (width - 355);
-            int y = (height - 140);
 
-            Graphics g = image.getGraphics();
-            g.setFont(new Font("Arial",Font.BOLD,14));
+            Image tempImage = image.getScaledInstance(1000,700, Image.SCALE_DEFAULT);
+            BufferedImage newImage = new BufferedImage(1000,700,image.getType());
+
+            int height = 700;
+            int width = 1000;
+            int x = (width - 350);
+            int y = (height - 135);
+
+            Graphics g = newImage.createGraphics();
+            g.drawImage(tempImage,0,0,null);
             g.drawImage(im,x,y,null);
             g.dispose();
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-            ImageIO.write(image,"png",byteArrayOutputStream);
+            ImageIO.write(newImage,"png",byteArrayOutputStream);
 
             String b64cv = Base64.encodeBytes(byteArrayOutputStream.toByteArray());
 
