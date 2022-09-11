@@ -1,0 +1,7 @@
+0 - cd /home/adonaisoft/hub-adonai/deploys/hub-utils
+
+1 - docker build -t hub_utils .
+
+2 - docker tag hub_utils:latest adonaisoft/hub_utils:0.0.1
+
+3 - docker-compose up -d

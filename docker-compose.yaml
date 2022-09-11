@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  hub_utils:
+    image: adonaisoft/hub_utils:0.0.1
+    restart: always
+    container_name: hub-utils
+    environment:
+      TZ: America/Sao_Paulo
+    network_mode: host
