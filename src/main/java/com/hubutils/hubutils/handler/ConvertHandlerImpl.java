@@ -15,30 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("hub/util")
-@CrossOrigin("*")
+@RequestMapping("utils")
+@CrossOrigin(origins = {"http:localhost:8090",""})
 public class ConvertHandlerImpl {
 
     @Autowired
     ConvertController convertController;
 
-    @PostMapping("/convertImage")
-    public ResponseEntity<?> convertImage(@RequestBody(required = true) Map<String,Object> body){
-        try {
-            HtmlConverter.convertToPdf(body.get("body").toString(),new FileOutputStream("string.pdf"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return ResponseEntity.ok().body("c");
-    }
-
-    @PostMapping("/convert")
-    public ResponseEntity<?> convertImageMultipart(@RequestBody MultipartFile multipartRequest){
-        convertController.image(multipartRequest);
-        return ResponseEntity.ok().body("OK");
-    }
-
-    @PostMapping("/convertb64")
+    @PostMapping("/actions/convertb64")
     public ResponseEntity<?> convertImageMultipart(@RequestBody Hashtable images){
         String ret = convertController.imageB64(images.get("imgString").toString(),images.get("imgText").toString());
         return ResponseEntity.ok().body(ret);
