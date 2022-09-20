@@ -8,13 +8,13 @@ import java.util.Hashtable;
 
 @RestController
 @RequestMapping("/utils")
+@CrossOrigin(origins ="*")
 public class ConvertHandlerImpl {
 
     @Autowired
     ConvertController convertController;
 
     @PostMapping("/textImage")
-    @CrossOrigin(origins ="*")
     public ResponseEntity<?> textImage(@RequestBody Hashtable images){
         String ret = convertController.imageB64(images.get("imgString").toString(),images.get("imgText").toString());
         return ResponseEntity.ok().body(ret);
