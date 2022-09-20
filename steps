@@ -2,6 +2,12 @@
 
 1 - docker build -t hub_utils .
 
-2 - docker tag hub_utils:latest adonaisoft/hub_utils:0.0.1
+2 - docker tag hub_utils:latest adonaisoft/hub_utils:0.0.13
 
 3 - docker-compose up -d
+
+
+#openssl pkcs12 -export -in adonai-cert.pem -inkey adonai-key.pem -out keystore.p12 -name tomcat -CAfile adonai-ca.pem -caname root
+#https://knasmueller.net/lets-encrypt-ssl-certificates-for-dockerized-spring-boot-in-2020
+
+cd /home/adonaisoft/hub-adonai/deploys/hub-utils ; docker build -t hub_utils .; docker tag hub_utils:latest adonaisoft/hub_utils:0.0.13 ; cd ..
