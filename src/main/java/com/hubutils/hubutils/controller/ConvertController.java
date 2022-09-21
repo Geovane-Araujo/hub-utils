@@ -50,8 +50,8 @@ public class ConvertController {
 
             int height = 700;
             int width = 1000;
-            int x = (width - 350);
-            int y = (height - 135);
+            int x = (width - imageText.getWidth());
+            int y = (height - imageText.getHeight());
 
             Graphics g = newImage.createGraphics();
             g.drawImage(tempImage,0,0,null);
